@@ -33,7 +33,7 @@ export default function Hero() {
         {/* Sub-headline */}
         <p className="text-xl md:text-2xl text-gray-400 max-w-4xl mx-auto mb-12 leading-relaxed">
           QuantaNexus delivers quantum-powered solutions for agriculture, supply chain, and climate modeling, 
-          turning humanity's biggest challenges into solvable equations.
+          turning humanity&apos;s biggest challenges into solvable equations.
         </p>
 
         {/* CTA Buttons */}
