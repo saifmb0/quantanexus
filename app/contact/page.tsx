@@ -1,6 +1,7 @@
 import Navbar from '@/components/Navbar';
 import Team from '@/components/Team';
 import Footer from '@/components/Footer';
+import { submitContactForm } from './actions';
 import { Mail, Send, CheckCircle, XCircle } from 'lucide-react';
 
 export default function ContactPage({
@@ -8,6 +9,7 @@ export default function ContactPage({
 }: {
   searchParams: { success?: string; error?: string };
 }) {
+  const { success, error } = searchParams;
   return (
     <main className="min-h-screen bg-black">
       <Navbar />
@@ -41,7 +43,7 @@ export default function ContactPage({
             </div>
 
             {/* Success Message */}
-            {searchParams.success && (
+            {success && (
               <div className="mb-6 p-4 bg-green-500/10 border border-green-500/30 rounded-lg flex items-start space-x-3">
                 <CheckCircle className="w-5 h-5 text-green-500 mt-0.5" />
                 <div>
@@ -54,7 +56,7 @@ export default function ContactPage({
             )}
 
             {/* Error Message */}
-            {searchParams.error && (
+            {error && (
               <div className="mb-6 p-4 bg-red-500/10 border border-red-500/30 rounded-lg flex items-start space-x-3">
                 <XCircle className="w-5 h-5 text-red-500 mt-0.5" />
                 <div>
@@ -66,7 +68,7 @@ export default function ContactPage({
               </div>
             )}
 
-            <form className="space-y-6">
+            <form action={submitContactForm} className="space-y-6">
               {/* Name Field */}
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">

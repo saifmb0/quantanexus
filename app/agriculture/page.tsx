@@ -1,8 +1,20 @@
+"use client";
+
+import { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Droplets, TrendingUp, Leaf, AlertCircle, CheckCircle } from 'lucide-react';
 
 export default function AgriculturePage() {
+  const [activeTab, setActiveTab] = useState('North');
+  const [tasks, setTasks] = useState([
+    { id: 1, text: 'Water North Field' },
+    { id: 2, text: 'Apply Fertilizer - East Field' }
+  ]);
+
+  const handleScheduleTask = () => {
+    setTasks([...tasks, { id: tasks.length + 1, text: 'New Scheduled Task' }]);
+  };
   return (
     <main className="min-h-screen bg-black">
       <Navbar />
@@ -59,16 +71,44 @@ export default function AgriculturePage() {
             
             {/* Field Tabs */}
             <div className="flex gap-2 mb-6">
-              <button className="px-4 py-2 bg-green-600 text-white rounded-lg font-medium">
+              <button 
+                onClick={() => setActiveTab('North')}
+                className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                  activeTab === 'North' 
+                    ? 'bg-green-600 text-white' 
+                    : 'bg-white/5 text-gray-400 hover:bg-white/10'
+                }`}
+              >
                 North
               </button>
-              <button className="px-4 py-2 bg-white/5 text-gray-400 hover:bg-white/10 rounded-lg font-medium transition-colors">
+              <button 
+                onClick={() => setActiveTab('South')}
+                className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                  activeTab === 'South' 
+                    ? 'bg-green-600 text-white' 
+                    : 'bg-white/5 text-gray-400 hover:bg-white/10'
+                }`}
+              >
                 South
               </button>
-              <button className="px-4 py-2 bg-white/5 text-gray-400 hover:bg-white/10 rounded-lg font-medium transition-colors">
+              <button 
+                onClick={() => setActiveTab('East')}
+                className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                  activeTab === 'East' 
+                    ? 'bg-green-600 text-white' 
+                    : 'bg-white/5 text-gray-400 hover:bg-white/10'
+                }`}
+              >
                 East
               </button>
-              <button className="px-4 py-2 bg-white/5 text-gray-400 hover:bg-white/10 rounded-lg font-medium transition-colors">
+              <button 
+                onClick={() => setActiveTab('West')}
+                className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                  activeTab === 'West' 
+                    ? 'bg-green-600 text-white' 
+                    : 'bg-white/5 text-gray-400 hover:bg-white/10'
+                }`}
+              >
                 West
               </button>
             </div>
@@ -79,7 +119,7 @@ export default function AgriculturePage() {
               <div className="relative w-48 h-48 rounded-full bg-gradient-to-br from-green-500 to-emerald-500 opacity-30 blur-2xl animate-pulse" />
               <div className="absolute text-center">
                 <div className="text-4xl font-bold bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent mb-2">
-                  North Field
+                  {activeTab} Field
                 </div>
                 <div className="text-sm text-gray-400">Real-time satellite analysis</div>
               </div>
@@ -106,7 +146,10 @@ export default function AgriculturePage() {
               <button className="px-6 py-3 bg-gradient-to-r from-green-600 to-emerald-600 rounded-lg font-semibold hover:shadow-lg hover:shadow-green-500/50 transition-all duration-300">
                 Optimize Irrigation
               </button>
-              <button className="px-6 py-3 bg-white/10 border border-white/20 rounded-lg font-semibold hover:bg-white/20 transition-all duration-300">
+              <button 
+                onClick={handleScheduleTask}
+                className="px-6 py-3 bg-white/10 border border-white/20 rounded-lg font-semibold hover:bg-white/20 transition-all duration-300"
+              >
                 Schedule Tasks
               </button>
             </div>
@@ -119,37 +162,28 @@ export default function AgriculturePage() {
               <h3 className="text-2xl font-bold text-white mb-6">Today&apos;s Tasks</h3>
               
               <div className="space-y-4">
-                <div className="flex items-start space-x-3 p-3 bg-white/5 rounded-lg">
-                  <CheckCircle className="w-5 h-5 text-green-500 mt-0.5" />
-                  <div className="flex-1">
-                    <div className="text-white font-medium">Water North Field</div>
-                    <div className="text-sm text-gray-400">Scheduled: 6:00 AM</div>
+                {tasks.map((task, index) => (
+                  <div 
+                    key={task.id} 
+                    className={`flex items-start space-x-3 p-3 bg-white/5 rounded-lg ${
+                      index === 0 || index === 1 ? '' : index === 2 ? 'border border-blue-500/30' : ''
+                    }`}
+                  >
+                    {index === 0 || index === 1 ? (
+                      <CheckCircle className="w-5 h-5 text-green-500 mt-0.5" />
+                    ) : index === 2 ? (
+                      <div className="w-5 h-5 rounded-full border-2 border-blue-500 mt-0.5" />
+                    ) : (
+                      <div className="w-5 h-5 rounded-full border-2 border-gray-600 mt-0.5" />
+                    )}
+                    <div className="flex-1">
+                      <div className="text-white font-medium">{task.text}</div>
+                      <div className="text-sm text-gray-400">
+                        Scheduled: {index === 0 ? '6:00 AM' : index === 1 ? '9:00 AM' : index === 2 ? '2:00 PM' : '5:00 PM'}
+                      </div>
+                    </div>
                   </div>
-                </div>
-
-                <div className="flex items-start space-x-3 p-3 bg-white/5 rounded-lg">
-                  <CheckCircle className="w-5 h-5 text-green-500 mt-0.5" />
-                  <div className="flex-1">
-                    <div className="text-white font-medium">Apply Fertilizer - East Field</div>
-                    <div className="text-sm text-gray-400">Scheduled: 9:00 AM</div>
-                  </div>
-                </div>
-
-                <div className="flex items-start space-x-3 p-3 bg-white/5 rounded-lg border border-blue-500/30">
-                  <div className="w-5 h-5 rounded-full border-2 border-blue-500 mt-0.5" />
-                  <div className="flex-1">
-                    <div className="text-white font-medium">Pest Inspection - South Field</div>
-                    <div className="text-sm text-gray-400">Scheduled: 2:00 PM</div>
-                  </div>
-                </div>
-
-                <div className="flex items-start space-x-3 p-3 bg-white/5 rounded-lg">
-                  <div className="w-5 h-5 rounded-full border-2 border-gray-600 mt-0.5" />
-                  <div className="flex-1">
-                    <div className="text-white font-medium">Harvest Assessment - West Field</div>
-                    <div className="text-sm text-gray-400">Scheduled: 5:00 PM</div>
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
 
