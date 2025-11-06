@@ -1,5 +1,6 @@
 "use client";
 
+import Link from 'next/link';
 import { Leaf, Globe, Network, ArrowUpRight } from 'lucide-react';
 
 export default function SolutionsGrid() {
@@ -9,21 +10,24 @@ export default function SolutionsGrid() {
       title: "Quantum Agriculture",
       description: "Enhancing productivity and sustainability through quantum-enhanced analysis of crop data, climate patterns, and supply chain efficiency.",
       gradient: "from-green-500 to-emerald-600",
-      delay: "0s"
+      delay: "0s",
+      href: "/agriculture"
     },
     {
       icon: Globe,
       title: "Climate Modeling",
       description: "Applying quantum computing to create more precise climate models, aiding in the prediction and mitigation of climate change impacts.",
       gradient: "from-blue-500 to-cyan-600",
-      delay: "0.1s"
+      delay: "0.1s",
+      href: "/climate-modeling"
     },
     {
       icon: Network,
       title: "Supply Chain",
       description: "Leveraging quantum algorithms to improve supply chain efficiency, reducing costs and enhancing the global flow of goods.",
       gradient: "from-purple-500 to-pink-600",
-      delay: "0.2s"
+      delay: "0.2s",
+      href: null
     }
   ];
 
@@ -47,12 +51,8 @@ export default function SolutionsGrid() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {solutions.map((solution, index) => {
             const Icon = solution.icon;
-            return (
-              <div
-                key={index}
-                className="group relative bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 rounded-2xl p-8 hover:border-white/20 transition-all duration-500 backdrop-blur-sm overflow-hidden"
-                style={{ animationDelay: solution.delay }}
-              >
+            const CardContent = (
+              <>
                 {/* Gradient background on hover */}
                 <div className={`absolute inset-0 bg-gradient-to-br ${solution.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500`} />
                 
@@ -85,6 +85,29 @@ export default function SolutionsGrid() {
 
                 {/* Border glow on hover */}
                 <div className={`absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-r ${solution.gradient} blur-xl -z-10`} />
+              </>
+            );
+
+            if (solution.href) {
+              return (
+                <Link
+                  key={index}
+                  href={solution.href}
+                  className="group relative bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 hover:border-blue-500 rounded-2xl p-8 transition-all duration-500 backdrop-blur-sm overflow-hidden block"
+                  style={{ animationDelay: solution.delay }}
+                >
+                  {CardContent}
+                </Link>
+              );
+            }
+
+            return (
+              <div
+                key={index}
+                className="group relative bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 rounded-2xl p-8 hover:border-white/20 transition-all duration-500 backdrop-blur-sm overflow-hidden"
+                style={{ animationDelay: solution.delay }}
+              >
+                {CardContent}
               </div>
             );
           })}

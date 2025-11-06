@@ -3,7 +3,6 @@
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import SolutionsGrid from '@/components/SolutionsGrid';
-import Team from '@/components/Team';
 import Footer from '@/components/Footer';
 
 export default function Home() {
@@ -12,7 +11,6 @@ export default function Home() {
       <Navbar />
       <Hero />
       <SolutionsGrid />
-      <Team />
       <Footer />
     </main>
   );

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from 'next/link';
 import { ArrowRight, Play } from 'lucide-react';
 
 export default function Hero() {
@@ -38,20 +39,20 @@ export default function Hero() {
 
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <button className="group relative px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg font-semibold text-lg overflow-hidden hover:shadow-2xl hover:shadow-blue-500/50 transition-all duration-300 min-w-[200px]">
+          <Link href="/agriculture" className="group relative px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg font-semibold text-lg overflow-hidden hover:shadow-2xl hover:shadow-blue-500/50 transition-all duration-300 min-w-[200px]">
             <span className="relative z-10 flex items-center justify-center space-x-2">
-              <span>Request a Demo</span>
+              <span>Explore Agriculture</span>
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </span>
             <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-          </button>
+          </Link>
 
-          <button className="group px-8 py-4 bg-white/5 border border-white/10 rounded-lg font-semibold text-lg hover:bg-white/10 transition-all duration-300 backdrop-blur-sm min-w-[200px]">
+          <Link href="/climate-modeling" className="group px-8 py-4 bg-white/5 border border-white/10 rounded-lg font-semibold text-lg hover:bg-white/10 transition-all duration-300 backdrop-blur-sm min-w-[200px]">
             <span className="flex items-center justify-center space-x-2">
               <Play className="w-5 h-5 group-hover:scale-110 transition-transform" />
-              <span>Learn More</span>
+              <span>Explore Climate Modeling</span>
             </span>
-          </button>
+          </Link>
         </div>
 
         {/* Floating particles */}
