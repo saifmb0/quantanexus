@@ -37,14 +37,14 @@ export async function submitContactForm(formData: FormData) {
       body: JSON.stringify(payload),
     });
 
-    if (res.ok) {
-      return redirect('/contact?success=true');
-    } else {
+    if (!res.ok) {
       console.error('Failed to send to Discord:', await res.text());
-      return redirect('/contact?error=true');
+      redirect('/contact?error=true');
     }
   } catch (error) {
-    console.error('Error in submitContactForm:', error);
-    return redirect('/contact?error=true');
+    console.error('Error sending to Discord:', error);
+    redirect('/contact?error=true');
   }
+
+  redirect('/contact?success=true');
 }
